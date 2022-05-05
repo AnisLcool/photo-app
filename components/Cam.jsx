@@ -7,8 +7,13 @@ const Cam = () => {
     console.log('return Cam.js')
     useEffect(() => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
-        // faire des appels à une API
-        console.log('useEffect Cam.js')
+        // faire des appels à une API;
+        Camera.requestCameraPermissionsAsync().then(response => {
+            console.log('reponsse');
+        }).catch(error => {
+            console.log(error);
+        });
+       
     })
     return (
         <View style={styles.container}>

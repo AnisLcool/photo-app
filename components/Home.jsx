@@ -20,6 +20,7 @@ const Home = () => {
                 
                 <Cam />
             </Modal>
+            
             <TouchableOpacity onPress={() => { }}>
                 <Entypo name='camera' size={64} color='black' />
             </TouchableOpacity>

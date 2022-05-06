@@ -19,7 +19,7 @@ const Cam = (props) => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
         // faire des appels à une API;
         // axios.get().then().catch()
-        
+
         Camera.requestCameraPermissionsAsync().then(response => {
             // denied, granted
             // const status = response.status;
@@ -63,11 +63,13 @@ const Cam = (props) => {
             console.log('response take picture : ', response);
             const image = response;
             props.setImageHandler(image);
+            if (permisssionMedia === 'granted') {
+                MediaLibrary.saveToLibraryAsync(image.uri).then(response => {
+                    console.log(response);
+                })
+            }
 
-            MediaLibrary.saveToLibraryAsync(image.uri).then(response => {
-                console.log(response);
-            })
-            
+
         }).catch();
     }
 

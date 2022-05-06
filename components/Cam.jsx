@@ -19,7 +19,7 @@ const Cam = () => {
             console.log(error);
         });
        
-    });
+    },[]);
 
     if(permisssion === false){
         return <View><Text>Permission was not granted!</Text></View>

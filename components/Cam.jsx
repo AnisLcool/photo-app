@@ -42,6 +42,7 @@ const Cam = () => {
         // react ne permet pas de faire ça => document.querySelector('Camera');
         cameraRef.current.takePictureAsync().then((response) => {
             console.log('response take picture : ', response);
+            const image = response;
         }).catch();
     }
 

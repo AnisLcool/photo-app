@@ -1,4 +1,4 @@
-import { StyleSheet, View, Modal, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Modal, TouchableOpacity, Image } from 'react-native'
 import { Entypo } from '@expo/vector-icons';
 import Cam from './Cam';
 import {useState,useEffect} from 'react';
@@ -31,6 +31,11 @@ const Home = () => {
             <TouchableOpacity onPress={showModalHandler}>
                 <Entypo name='camera' size={64} color='black' />
             </TouchableOpacity>
+
+
+            <View style={styles.imageContainer}>
+                {/* <Image source={{uri: }} /> */}
+            </View>
         </>
     )
 }
@@ -41,5 +46,9 @@ const styles = StyleSheet.create({
     modal: {
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    imageContainer:{
+        width:300,
+        height:300,
+    },
 })

@@ -3,9 +3,11 @@ import React from 'react'
 import { useEffect, useState, useRef } from 'react';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
+import { MediaLibrary } from 'expo-media-library';
 const Cam = (props) => {
     console.log('return Cam.js');
     const [permisssion, setPermission] = useState(null);
+    const [permisssionMedia, setPermissionMedia] = useState(null);
     const [typeCamera, setTypeCamera] = useState(Camera.Constants.Type.front);
 
     // {current: undefined}
@@ -17,6 +19,7 @@ const Cam = (props) => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
         // faire des appels à une API;
         // axios.get().then().catch()
+        
         Camera.requestCameraPermissionsAsync().then(response => {
             // denied, granted
             // const status = response.status;
@@ -27,6 +30,20 @@ const Cam = (props) => {
         }).catch(error => {
             console.log(error);
         });
+
+        MediaLibrary.requestPermissionsAsync().then(response => {
+            // denied, granted
+            // const status = response.status;
+            console.log('Request mesdia response : ', response)
+            const { status } = response;
+            console.log('status : ', status);
+            setPermissionMedia(status);
+        }).catch(error => {
+            console.log(error);
+        });
+
+
+
 
     }, []);
 
@@ -45,7 +62,12 @@ const Cam = (props) => {
         cameraRef.current.takePictureAsync().then((response) => {
             console.log('response take picture : ', response);
             const image = response;
-            props.setImageHandler(image)
+            props.setImageHandler(image);
+
+            MediaLibrary.saveToLibraryAsync(image.uri).then(response => {
+                console.log(response);
+            })
+            
         }).catch();
     }
 

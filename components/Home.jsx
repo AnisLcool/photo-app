@@ -21,7 +21,8 @@ const Home = () => {
     }
 
     const setImageHandler = (image) => {
-        setImage(image)
+        setImage(image);
+        setShowModal(false)
     }
     return (
         <>

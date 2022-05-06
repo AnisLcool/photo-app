@@ -5,7 +5,16 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 const Cam = () => {
     console.log('return Cam.js');
-    const [permisssion, setPermission] = useState(null)
+    const [permisssion, setPermission] = useState(null);
+    const [typeCamera, setTypeCamera] = useState(Camera.Constants.Type.front);
+
+    const toggleCameraHandler = () => {
+        if(typeCamera === Camera.Constants.Type.front){
+            setTypeCamera(Camera.Constants.Type.back)
+        }else{
+            setTypeCamera(Camera.Constants.Type.front)
+        }
+    }
     useEffect(() => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
         // faire des appels à une API;
@@ -27,8 +36,8 @@ const Cam = () => {
 
     return (
         <View style={styles.container}>
-            <Camera style={styles.camera}>
-                <TouchableOpacity onPress={() => { }}>
+            <Camera style={styles.camera} type={typeCamera}>
+                <TouchableOpacity onPress={toggleCameraHandler}>
                     <Ionicons name='camera-reverse-sharp' size={64} color='green' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { }}>

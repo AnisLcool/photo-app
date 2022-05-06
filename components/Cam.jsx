@@ -1,21 +1,30 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 const Cam = () => {
-    console.log('return Cam.js')
+    console.log('return Cam.js');
+    const [permisssion, setPermission] = useState(false)
     useEffect(() => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
         // faire des appels à une API;
         // axios.get().then().catch()
         Camera.requestCameraPermissionsAsync().then(response => {
-            console.log('reponse' , response);
+            // denied, granted
+            // const status = response.status;
+            const { status } = response;
+            setPermission(status === 'granted' ? true : false);
         }).catch(error => {
             console.log(error);
         });
        
-    })
+    });
+
+    if(permisssion === false){
+        return <View><Text>Permission was not granted!</Text></View>
+    }
+
     return (
         <View style={styles.container}>
             <Camera style={styles.camera}>

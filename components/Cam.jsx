@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useEffect } from 'react';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -8,8 +8,9 @@ const Cam = () => {
     useEffect(() => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
         // faire des appels à une API;
+        // axios.get().then().catch()
         Camera.requestCameraPermissionsAsync().then(response => {
-            console.log('reponsse');
+            console.log('reponse' , response);
         }).catch(error => {
             console.log(error);
         });
@@ -17,7 +18,7 @@ const Cam = () => {
     })
     return (
         <View style={styles.container}>
-            <Camera>
+            <Camera style={styles.camera}>
                 <TouchableOpacity onPress={() => { }}>
                     <Ionicons name='camera-reverse-sharp' size={64} color='green' />
                 </TouchableOpacity>
@@ -34,6 +35,10 @@ export default Cam
 const styles = StyleSheet.create({
     container: {
         borderWidth: 3,
+        borderColor:'red',
         flex: 1
+    },
+    camera:{
+        flex:1
     }
 })

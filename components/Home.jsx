@@ -1,27 +1,34 @@
 import { StyleSheet, View, Modal, TouchableOpacity } from 'react-native'
-import React from 'react'
 import { Entypo } from '@expo/vector-icons';
 import Cam from './Cam';
-import {useEffect} from 'react';
+import {useState,useEffect} from 'react';
+import React from 'react';
 // composant Modal comme le composant Parent(racine) dans le composant Cam
 const Home = () => {
+   const [showModal, setShowModal] = useState(false);
     useEffect(() => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
         // faire des appels à une API
-        console.log('useEffect Home.js')
+        console.log('useEffect Home.js');
     })
     console.log('return Home.js')
+    const showModalHandler = () => {
+        setShowModal(true);
+    }
+    const hideModalHandler = () =>{
+        setShowModal(false);
+    }
     return (
         <>
-            <Modal visible={true}>
+            <Modal visible={showModal} animationType='slide'>
                 <View style={styles.modal}>
-                    <Entypo name='cross' size={45} color='red' />
+                    <Entypo name='cross' size={45} color='red' onPress={hideModalHandler}/>
                 </View>
                 
                 <Cam />
             </Modal>
             
-            <TouchableOpacity onPress={() => { }}>
+            <TouchableOpacity onPress={showModalHandler}>
                 <Entypo name='camera' size={64} color='black' />
             </TouchableOpacity>
         </>

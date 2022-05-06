@@ -3,11 +3,12 @@ import React from 'react'
 import { useEffect, useState, useRef } from 'react';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
-const Cam = () => {
+const Cam = (props) => {
     console.log('return Cam.js');
     const [permisssion, setPermission] = useState(null);
     const [typeCamera, setTypeCamera] = useState(Camera.Constants.Type.front);
 
+    // {current: undefined}
     const cameraRef = useRef();
 
     console.log('CAMERA REF : ', cameraRef);
@@ -19,6 +20,7 @@ const Cam = () => {
         Camera.requestCameraPermissionsAsync().then(response => {
             // denied, granted
             // const status = response.status;
+            console.log('Request camera response : ', response)
             const { status } = response;
             console.log('status : ', status);
             setPermission(status);
@@ -43,6 +45,7 @@ const Cam = () => {
         cameraRef.current.takePictureAsync().then((response) => {
             console.log('response take picture : ', response);
             const image = response;
+            props.setImageHandler(image)
         }).catch();
     }
 

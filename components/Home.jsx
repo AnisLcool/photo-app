@@ -6,6 +6,7 @@ import React from 'react';
 // composant Modal comme le composant Parent(racine) dans le composant Cam
 const Home = () => {
    const [showModal, setShowModal] = useState(false);
+   const [image, setImage] = useState(null);
     useEffect(() => {
         // synchrone , asynchrone, promise, ajax, fetch, axios => 
         // faire des appels à une API
@@ -18,6 +19,10 @@ const Home = () => {
     const hideModalHandler = () =>{
         setShowModal(false);
     }
+
+    const setImageHandler = (image) => {
+        setImage(image)
+    }
     return (
         <>
             <Modal visible={showModal} animationType='slide'>
@@ -25,7 +30,7 @@ const Home = () => {
                     <Entypo name='cross' size={45} color='red' onPress={hideModalHandler}/>
                 </View>
                 
-                <Cam />
+                <Cam setImageHandler={setImageHandler} />
             </Modal>
             
             <TouchableOpacity onPress={showModalHandler}>
@@ -34,7 +39,7 @@ const Home = () => {
 
 
             <View style={styles.imageContainer}>
-                {/* <Image source={{uri: }} /> */}
+                {image && <Image style={styles.image} source={{uri: image.uri }} />}
             </View>
         </>
     )
@@ -51,4 +56,8 @@ const styles = StyleSheet.create({
         width:300,
         height:300,
     },
+    image:{
+        flex: 1,
+        borderWidth: 2, borderColor: 'black',borderRadius: 150,
+    }
 })
